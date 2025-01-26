@@ -9,11 +9,150 @@ Original file is located at
 
 import streamlit as st
 import random
+import pandas as pd
+import datetime
 
+st.set_page_config(layout="wide")
 st.title('Test Streamlit')
+
 st.write('Hello World!')
 st.write('MADT4')
 
 if st.button('Generate Random Number'):
     random_number = random.randint(1, 100)
     st.write(f'Random Number: {random_number}')
+
+
+col1_1, col1_2 = st.columns(2)
+with col1_1:
+    st.header("AAAAAA")
+with col1_2:
+    st.header("BBBBBB")
+
+col2_1, col2_2 = st.columns([3, 1], border=True)
+col2_1.header("CCCCCC")
+col2_2.header("DDDDDD")
+
+#Container Layout
+with st.container():
+    st.write("MMMMMM")
+
+container = st.container(border=True)
+container.write("NNNNNNN")
+
+#Column with Container
+col1, col2 = st.columns([0.3, 0.7], border=True)
+with col1.container():
+    st.write("Container 1 @ Column 1")
+
+cc2 = col2.container(height=150)
+cc2.write("Container 2 @ Column 2")
+
+#Column for loop
+con1 = st.container()
+for col in con1.columns([1, 2, 3, 4],border=True):
+    col.write("Hello World")
+
+con2 = st.container(height=100)
+cc2_1, cc2_2, cc2_3 = con2.columns(3)
+cc2_1.write("Column 5 @ Container 2")
+cc2_2.write("Column 6 @ Container 2")
+cc2_3.write("Column 7 @ Container 2")
+
+#Sidebar
+st.sidebar.title('Filter')
+st.sidebar.header('Option')
+st.sidebar.selectbox("Pls Select One!",
+('Op1', 'Op2', 'Op3')
+)
+
+with st.sidebar:
+    st.radio(
+        "Pls Select One!",
+        ['cho1', 'cho2', 'cho3'],
+    )
+
+#Write Object
+df = pd.DataFrame(
+    {
+        "first column":[1, 2, 3, 4],
+        "second column": [10, 20, 30, 40]
+    }
+)
+
+st.title('Test streamlit')
+
+st.write('Hello world!')
+
+st.write("1 + 1 = ", 2)
+
+st.write(df)
+
+#Write Object devider
+st.header('One')
+st.header('Two', divider=True)
+st.header('Three', divider=True)
+
+#Input
+st.title('Input value')
+username_input = st.text_input(
+    "Username: ",
+    value="?????"
+)
+
+password_input = st.text_input(
+    "Password: ",
+    type="password",
+    placeholder="pls give password"
+)
+
+st.write(username_input, password_input)
+
+#Text Area
+txt = st.text_area(
+    "Text to analyze"
+    "management of analytics and datatecnologies "*5,
+)
+st.write(f"You wrote {len(txt)} characters.")
+
+#Number input
+number = st.number_input(
+    "Insert a number",
+    min_value=0,
+    max_value=10,
+    value=5,
+    step=2,
+    format="%0.1f"
+)
+st.write("The current number is ", number)
+
+#Slider
+score = st.slider("Select Score", 0.0, 100.0, 75.0)
+st.write("Score:",score)
+
+risk = st.slider("Select a range of risk", 0.0, 100.0, (25.0,75.0))
+st.write("Risk:", risk)
+
+#Date input
+bd = st.date_input("When's your birthday")
+st.write("Your birthday is:", bd)
+
+#Selectbox
+alarm = st.time_input("Set an alarm for", datetime.time(8, 45))
+st.write("Alarm is set for", alarm)
+
+#Radio
+number = st.radio(
+    "Pls select number",
+    ["One", "Two", "Three"],
+    captions = ['1', '2', '3'],
+    horizontal=True,
+    index=2
+)
+st.write("You selected:",number)
+
+#Checkbox
+
+#Toggle
+
+#Multiselect
